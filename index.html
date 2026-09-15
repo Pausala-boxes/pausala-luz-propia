@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Pausala · Edición 03 · Luz Propia</title>
+<title>Pausala · Edición 01 · Luz Propia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -375,7 +375,7 @@
   <div class="deco-circle" style="width:200px;height:200px;bottom:-60px;left:-80px;"></div>
 
   <div class="brand-mark">Pausala</div>
-  <div class="edition-tag">Edición 03</div>
+  <div class="edition-tag">Edición 01</div>
 
   <div class="title-xl">Luz<br><em>Propia</em></div>
 
@@ -388,7 +388,7 @@
 
 <!-- ══ SCREEN 1: MÚSICA ══ -->
 <div class="screen" id="s1">
-  <div class="brand-mark">Pausala · Edición 03</div>
+  <div class="brand-mark">Pausala · Edición 01</div>
 
   <div class="title-lg">Primero,<br>la <em>música</em></div>
 
@@ -397,9 +397,9 @@
   <div class="mood-tag">· Jazz suave · Lo-fi nocturno · Indie folk ·</div>
 
   <div class="yt-wrap">
-    <iframe src="https://www.youtube.com/embed/DSGyEsJ17cI?autoplay=0&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    <iframe src="https://www.youtube.com/embed/c-Qf9ZtX5vs?autoplay=0&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
   </div>
-  <a href="https://www.youtube.com/watch?v=DSGyEsJ17cI" target="_blank" rel="noopener" style="font-size:11px;color:rgba(255,255,255,0.3);text-decoration:underline;margin-bottom:24px;">¿No suena? Abrir en YouTube</a>
+  <a href="https://www.youtube.com/watch?v=c-Qf9ZtX5vs" target="_blank" rel="noopener" style="font-size:11px;color:rgba(255,255,255,0.3);text-decoration:underline;margin-bottom:24px;">¿No suena? Abrir en YouTube</a>
 
   <button class="btn-primary" onclick="next()">Ya está sonando →</button>
   <button class="btn-ghost" onclick="next()">Prefiero mi propia música</button>
@@ -505,6 +505,11 @@
 <div class="screen" id="s6" style="justify-content:flex-start; padding-top:60px;">
   <div class="brand-mark" style="margin-bottom:4px;">La espera cómplice</div>
 
+  <div class="mode-toggle" style="display:flex;gap:8px;margin-bottom:16px;">
+    <button class="mode-btn active" id="modeBtnPareja" onclick="setQuestionMode('pareja')" style="flex:1;padding:10px;border-radius:20px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:var(--blanco);font-family:inherit;font-size:13px;cursor:pointer;">❤️ Pareja</button>
+    <button class="mode-btn" id="modeBtnAmigas" onclick="setQuestionMode('amigas')" style="flex:1;padding:10px;border-radius:20px;border:1px solid rgba(255,255,255,0.25);background:transparent;color:var(--blanco);font-family:inherit;font-size:13px;cursor:pointer;">👯 Amigas</button>
+  </div>
+
   <div class="timer-display" id="timerDisplay">25:00</div>
   <div class="timer-label">minutos para solidificar</div>
 
@@ -545,7 +550,7 @@
 <div class="screen" id="s8">
   <div class="brand-mark">Pausala</div>
 
-  <div class="edition-tag">Edición 03 · Luz Propia</div>
+  <div class="edition-tag">Edición 01 · Luz Propia</div>
 
   <div class="title-xl">Gracias<br>por <em>pausar</em></div>
 
@@ -567,6 +572,9 @@
       <div class="step-text">La vela dura entre 30 y 40 horas de uso.</div>
     </div>
   </div>
+
+  <a href="https://www.instagram.com/pausala.boxes/" target="_blank" rel="noopener" class="btn-primary" style="text-decoration:none;display:inline-block;margin-bottom:14px;">Seguinos en Instagram →</a>
+  <button onclick="restart()" style="background:none;border:none;color:rgba(255,255,255,0.35);font-family:inherit;font-size:13px;text-decoration:underline;cursor:pointer;margin-bottom:24px;">Volver a vivir la experiencia</button>
 
   <div class="brand-mark" style="font-size:13px;color:rgba(255,255,255,0.15);letter-spacing:8px;">PAUSALA</div>
 </div>
@@ -592,6 +600,13 @@ const scents = {
 // ── NAV ──
 const totalScreens = 9;
 let current = 0;
+
+function restart() {
+  document.getElementById('s' + current).classList.remove('active');
+  current = 0;
+  document.getElementById('s0').classList.add('active');
+  window.scrollTo(0, 0);
+}
 
 function next() {
   if (current < totalScreens - 1) {
@@ -650,7 +665,7 @@ function updateTimerDisplay() {
 }
 
 // ── PREGUNTAS ──
-const questions = [
+const questionsPareja = [
   "¿Cuál es tu recuerdo favorito nuestro de este último año?",
   "Si tuviéramos que elegir una canción que defina nuestra historia, ¿cuál sería?",
   "¿Qué es lo que más te sorprendió de mí desde que nos conocemos?",
@@ -662,14 +677,42 @@ const questions = [
   "¿Cuál es el plan perfecto para vos: tranquilo, aventurero o improvisado?",
   "¿Hay algo que querés contarme y que nunca encontraste el momento?"
 ];
+
+const questionsAmigas = [
+  "¿Cuál es el recuerdo que más se repite cuando piensan en nuestra amistad?",
+  "Si el grupo fuera una serie, ¿qué título le pondrían a esta temporada?",
+  "¿Qué es lo que más valorás de esta amistad hoy?",
+  "¿Cuál fue el viaje o plan que más disfrutaron juntas?",
+  "Si pudieran repetir una junta como esta, ¿qué no cambiarían?",
+  "¿Qué costumbre del grupo esperan que dure para siempre?",
+  "¿Qué aprendieron de ustedes mismas gracias a esta amistad?",
+  "Si tuvieran que elegir una palabra para este año juntas, ¿cuál sería?",
+  "¿Cuál es el plan ideal para la próxima juntada?",
+  "¿Hay algo lindo que nunca les dijeron a esta persona y quieran decirlo ahora?"
+];
+
+let currentQuestions = questionsPareja;
 let qIndex = 0;
 
+function setQuestionMode(mode) {
+  currentQuestions = (mode === 'amigas') ? questionsAmigas : questionsPareja;
+  qIndex = 0;
+  document.getElementById('questionText').textContent = '"' + currentQuestions[qIndex] + '"';
+
+  const btnPareja = document.getElementById('modeBtnPareja');
+  const btnAmigas = document.getElementById('modeBtnAmigas');
+  const active = 'rgba(255,255,255,0.08)';
+  const inactive = 'transparent';
+  btnPareja.style.background = (mode === 'pareja') ? active : inactive;
+  btnAmigas.style.background = (mode === 'amigas') ? active : inactive;
+}
+
 function nextQuestion() {
-  qIndex = (qIndex + 1) % questions.length;
+  qIndex = (qIndex + 1) % currentQuestions.length;
   const card = document.getElementById('questionCard');
   card.style.opacity = '0';
   setTimeout(() => {
-    document.getElementById('questionText').textContent = '"' + questions[qIndex] + '"';
+    document.getElementById('questionText').textContent = '"' + currentQuestions[qIndex] + '"';
     card.style.opacity = '1';
   }, 200);
 }
